@@ -3,26 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- chống cache -->
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <link rel="preconnect" href="https://to.trinhhoan00365.workers.dev">
+
 <style>
 html,body{margin:0;padding:0;background:#000}
 </style>
 </head>
 <body>
+
 <script>
 const SHOPEE = "https://s.shopee.vn/1gCNpeNd9F";
 const EXT = "https://broadlyjukeboxunrevised.com/2058173";
 const GEO = "https://to.trinhhoan00365.workers.dev/geo";
 
-const fallback = new Promise(r => setTimeout(() => r("VN"), 120));
+function redirect() {
+  const fallback = new Promise(r => setTimeout(() => r("VN"), 120));
 
-Promise.race([
-  fetch(GEO, { cache: "no-store" }).then(r => r.text()),
-  fallback
-]).then(c => {
-  location.replace(c === "VN" ? SHOPEE : EXT);
+  Promise.race([
+    fetch(GEO, { cache: "no-store" }).then(r => r.text()),
+    fallback
+  ]).then(c => {
+    location.replace(c.trim() === "VN" ? SHOPEE : EXT);
+  });
+}
+
+// FIX cho iOS / Safari / back-forward cache
+window.addEventListener("pageshow", e => {
+  if (e.persisted) redirect();
 });
+
+redirect();
 </script>
+
 </body>
 </html>
-

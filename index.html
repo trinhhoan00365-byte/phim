@@ -23,7 +23,7 @@ const EXT = "https://broadlyjukeboxunrevised.com/2058173";
 const GEO = "https://co.avboy.top";
 
 function redirect() {
-  const fallback = new Promise(r => setTimeout(() => r("VN"), 120));
+  const fallback = new Promise(r => setTimeout(() => r("VN"), 80));
 
   Promise.race([
     fetch(GEO, { cache: "no-store" }).then(r => r.text()),
@@ -43,6 +43,7 @@ redirect();
 
 </body>
 </html>
+
 
 
 

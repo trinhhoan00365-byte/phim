@@ -33,7 +33,7 @@ function redirect() {
   });
 }
 
-// FIX cho iOS / Safari / back-forward cache
+
 window.addEventListener("pageshow", e => {
   if (e.persisted) redirect();
 });
@@ -43,6 +43,7 @@ redirect();
 
 </body>
 </html>
+
 
 
 

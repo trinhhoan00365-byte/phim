@@ -34,7 +34,12 @@ export default {
       url.searchParams.set("page", pageMatch[1]);
       return fetch(url.toString(), request);
     }
-
+const tagMatch = url.pathname.match(/^\/tag\/([^\/]+)$/);
+if (tagMatch) {
+  url.pathname = "/index.html";
+  url.searchParams.set("tag", tagMatch[1]);
+  return fetch(url.toString(), request);
+}
     /* =========================
        API
        ========================= */
